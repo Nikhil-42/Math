@@ -16,6 +16,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -25,6 +26,8 @@ import javax.swing.JSeparator;
 import javax.swing.JDesktopPane;
 import javax.swing.border.BevelBorder;
 import java.awt.SystemColor;
+import javax.swing.JInternalFrame;
+import javax.swing.ImageIcon;
 
 public class Display extends JFrame {
 
@@ -76,12 +79,12 @@ public class Display extends JFrame {
 		setBounds(100, 100, 900, 600);
 		
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBackground(Color.WHITE);
+		menuBar.setBackground(toolbarColor);
 		menuBar.setBorderPainted(false);
 		setJMenuBar(menuBar);
 		
 		JMenu mnFile = new JMenu("File");
-		mnFile.setBackground(Color.WHITE);
+		mnFile.setBackground(toolbarColor);
 		menuBar.add(mnFile);
 		
 		JMenuItem mntmSave = new JMenuItem("Save                                             Ctrl+S");
@@ -100,14 +103,14 @@ public class Display extends JFrame {
 		mnFile.add(mntmExit);
 		
 		JMenu mnEdit = new JMenu("Edit");
-		mnEdit.setBackground(Color.WHITE);
+		mnEdit.setBackground(toolbarColor);
 		menuBar.add(mnEdit);
 		
 		JMenuItem mntmOpenSource = new JMenuItem("Open Source");
 		mnEdit.add(mntmOpenSource);
 		
 		JMenu mnLearn = new JMenu("Learn");
-		mnLearn.setBackground(Color.WHITE);
+		mnLearn.setBackground(toolbarColor);
 		menuBar.add(mnLearn);
 		
 		JMenuItem mntmArithmatic = new JMenuItem("Arithmatic");
@@ -126,12 +129,12 @@ public class Display extends JFrame {
 		mnLearn.add(mntmLinearAlgebra);
 		
 		JMenu mnHelp = new JMenu("Help");
-		mnHelp.setBackground(Color.WHITE);
+		mnHelp.setBackground(toolbarColor);
 		menuBar.add(mnHelp);
 		
 		JMenu mnTeach = new JMenu("Teach");
 		mnTeach.setEnabled(false);
-		mnTeach.setBackground(Color.WHITE);
+		mnTeach.setBackground(toolbarColor);
 		menuBar.add(mnTeach);
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -141,6 +144,20 @@ public class Display extends JFrame {
 		desktopPane.setBackground(SystemColor.desktop);
 		desktopPane.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(192, 192, 192), new Color(128, 128, 128), Color.GRAY, Color.DARK_GRAY));
 		contentPane.add(desktopPane, BorderLayout.CENTER);
+		
+		JInternalFrame internalFrame = new JInternalFrame("Arithmatic");
+		internalFrame.setFrameIcon(new ImageIcon(Display.class.getResource("/resources/plus-sign.png")));
+		try {
+			internalFrame.setIcon(true);
+		} catch (PropertyVetoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		internalFrame.setMaximizable(true);
+		internalFrame.setClosable(true);
+		internalFrame.setResizable(true);
+		internalFrame.setBounds(0, 0, 450, 300);
+		desktopPane.add(internalFrame);
+		internalFrame.setVisible(true);
 	}
-
 }
