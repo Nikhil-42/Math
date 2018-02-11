@@ -2,32 +2,25 @@ package display;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
+import java.beans.PropertyVetoException;
 
-import javax.swing.Box;
-import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JToolBar;
+import javax.swing.JSeparator;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.beans.PropertyVetoException;
-import java.awt.event.ActionEvent;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JSeparator;
-import javax.swing.JDesktopPane;
 import javax.swing.border.BevelBorder;
-import java.awt.SystemColor;
-import javax.swing.JInternalFrame;
-import javax.swing.ImageIcon;
 
 public class Display extends JFrame {
 
@@ -36,6 +29,7 @@ public class Display extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTextField searchBar;
 
 	/**
 	 * Launch the application.
@@ -107,6 +101,7 @@ public class Display extends JFrame {
 		menuBar.add(mnEdit);
 		
 		JMenuItem mntmOpenSource = new JMenuItem("Open Source");
+		mntmOpenSource.setEnabled(false);
 		mnEdit.add(mntmOpenSource);
 		
 		JMenu mnLearn = new JMenu("Learn");
@@ -128,9 +123,22 @@ public class Display extends JFrame {
 		JMenuItem mntmLinearAlgebra = new JMenuItem("Linear Algebra");
 		mnLearn.add(mntmLinearAlgebra);
 		
+		JMenu mnCalculate = new JMenu("Calculate");
+		menuBar.add(mnCalculate);
+		
+		JMenuItem mntmLinearAlgebra_1 = new JMenuItem("Linear Algebra");
+		mnCalculate.add(mntmLinearAlgebra_1);
+		
 		JMenu mnHelp = new JMenu("Help");
 		mnHelp.setBackground(toolbarColor);
 		menuBar.add(mnHelp);
+		
+		JLabel lblSearch = new JLabel("Search:                       ");
+		mnHelp.add(lblSearch);
+		
+		searchBar = new JTextField();
+		mnHelp.add(searchBar);
+		searchBar.setColumns(10);
 		
 		JMenu mnTeach = new JMenu("Teach");
 		mnTeach.setEnabled(false);
@@ -141,23 +149,29 @@ public class Display extends JFrame {
 		setContentPane(contentPane);
 		
 		JDesktopPane desktopPane = new JDesktopPane();
-		desktopPane.setBackground(SystemColor.desktop);
+		desktopPane.setBackground(Color.BLACK);
 		desktopPane.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(192, 192, 192), new Color(128, 128, 128), Color.GRAY, Color.DARK_GRAY));
 		contentPane.add(desktopPane, BorderLayout.CENTER);
 		
-		JInternalFrame internalFrame = new JInternalFrame("Arithmatic");
-		internalFrame.setFrameIcon(new ImageIcon(Display.class.getResource("/resources/plus-sign.png")));
+		JInternalFrame arithmaticLearn = new JInternalFrame("Arithmatic");
+		arithmaticLearn.setFrameIcon(new ImageIcon(Display.class.getResource("/resources/plus-sign.png")));
 		try {
-			internalFrame.setIcon(true);
+			arithmaticLearn.setIcon(true);
 		} catch (PropertyVetoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		internalFrame.setMaximizable(true);
-		internalFrame.setClosable(true);
-		internalFrame.setResizable(true);
-		internalFrame.setBounds(0, 0, 450, 300);
-		desktopPane.add(internalFrame);
-		internalFrame.setVisible(true);
+		arithmaticLearn.setMaximizable(true);
+		arithmaticLearn.setClosable(true);
+		arithmaticLearn.setResizable(true);
+		arithmaticLearn.setBounds(0, 0, 450, 300);
+		desktopPane.add(arithmaticLearn);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		arithmaticLearn.getContentPane().add(tabbedPane, BorderLayout.CENTER);
+		
+		JPanel additionPanel = new JPanel();
+		tabbedPane.addTab("Addition", new ImageIcon(Display.class.getResource("/resources/plus-sign.png")), additionPanel, "Improve your addition skills.");
+		arithmaticLearn.setVisible(true);
 	}
 }
