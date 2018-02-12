@@ -15,6 +15,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
@@ -154,6 +155,13 @@ public class Display extends JFrame {
 		contentPane.add(desktopPane, BorderLayout.CENTER);
 		
 		JInternalFrame arithmaticLearn = new JInternalFrame("Arithmatic");
+		try {
+			arithmaticLearn.setClosed(true);
+		} catch (PropertyVetoException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		arithmaticLearn.setEnabled(false);
 		arithmaticLearn.setFrameIcon(new ImageIcon(Display.class.getResource("/resources/plus-sign.png")));
 		try {
 			arithmaticLearn.setIcon(true);
@@ -164,14 +172,22 @@ public class Display extends JFrame {
 		arithmaticLearn.setMaximizable(true);
 		arithmaticLearn.setClosable(true);
 		arithmaticLearn.setResizable(true);
-		arithmaticLearn.setBounds(0, 0, 450, 300);
+		arithmaticLearn.setBounds(34, 35, 450, 300);
 		desktopPane.add(arithmaticLearn);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		arithmaticLearn.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
 		JPanel additionPanel = new JPanel();
-		tabbedPane.addTab("Addition", new ImageIcon(Display.class.getResource("/resources/plus-sign.png")), additionPanel, "Improve your addition skills.");
-		arithmaticLearn.setVisible(true);
+		tabbedPane.addTab("Addition", null, additionPanel, "Improve your addition skills.");
+		
+		JProgressBar timer = new JProgressBar();
+		timer.setValue(50);
+		timer.setForeground(new Color(255, 0, 0));
+		timer.setBackground(new Color(0, 128, 0));
+		arithmaticLearn.getContentPane().add(timer, BorderLayout.SOUTH);
+		// TODO Set up timer
+		
+		// TODO Set up open function
 	}
 }
