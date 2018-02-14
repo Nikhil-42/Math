@@ -1,20 +1,21 @@
 package display;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.beans.PropertyVetoException;
 
 import javax.swing.ImageIcon;
-import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 
-public class LearnArithmatic extends JInternalFrame {
+public class LearnArithmatic extends PracticeWindow {
 
 	/**
 	 * 
@@ -25,33 +26,21 @@ public class LearnArithmatic extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public LearnArithmatic() {
-		setIconifiable(true);
+		super("Arithmatic");
 		setFrameIcon(new ImageIcon(LearnArithmatic.class.getResource("/resources/Calculator-icon.png")));
-		setMaximizable(true);
-		try {
-			setSelected(true);
-			setIcon(true);
-		} catch (PropertyVetoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		setTitle("Arithmatic");
-		setResizable(true);
-		setClosable(true);
-		setBounds(100, 100, 450, 300);
 		
-		JProgressBar timer = new JProgressBar();
-		timer.setBackground(Color.RED);
-		timer.setForeground(Color.GREEN);
-		getContentPane().add(timer, BorderLayout.SOUTH);
-		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		getContentPane().add(tabbedPane, BorderLayout.CENTER);
+		JTabbedPane tabbedPane = (JTabbedPane) super.getComponentByName("tabs");
+				
 		
 		JPanel addition = new JPanel();
 		addition.setBorder(new CompoundBorder(UIManager.getBorder("Button.border"), new EtchedBorder(EtchedBorder.LOWERED, null, new Color(64, 64, 64))));
-		tabbedPane.addTab("Addition", new ImageIcon(LearnArithmatic.class.getResource("/resources/plus-sign.png")), addition, null);
+		tabbedPane.addTab("Addition", new ImageIcon(PracticeWindow.class.getResource("/resources/plus-sign.png")), addition, null);
+		addition.setLayout(new CardLayout(0, 0));
 		tabbedPane.setEnabledAt(0, true);
+		
+		JSlider Difficulty = new JSlider();
+		Difficulty.setOrientation(SwingConstants.VERTICAL);
+		getContentPane().add(Difficulty, BorderLayout.EAST);
 		this.setVisible(true);
 
 	}

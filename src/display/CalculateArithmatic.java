@@ -1,14 +1,13 @@
 package display;
 
-import java.awt.EventQueue;
-import java.beans.PropertyVetoException;
-
-import javax.swing.JInternalFrame;
-import javax.swing.JSplitPane;
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.beans.PropertyVetoException;
+
 import javax.swing.Box;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 
 public class CalculateArithmatic extends JInternalFrame {
 
