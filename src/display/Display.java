@@ -4,9 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
-import java.beans.PropertyVetoException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -15,13 +16,19 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 import javax.swing.JSeparator;
-import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.BevelBorder;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JToolBar;
+import java.awt.Dimension;
+import javax.swing.JToggleButton;
+import javax.swing.Box;
 
 public class Display extends JFrame {
 
@@ -51,7 +58,12 @@ public class Display extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	private ArrayList<JInternalFrame> internalFrames;
+	
 	public Display() {
+		internalFrames = new ArrayList<JInternalFrame>();
+		
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException e) {
@@ -154,40 +166,43 @@ public class Display extends JFrame {
 		desktopPane.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(192, 192, 192), new Color(128, 128, 128), Color.GRAY, Color.DARK_GRAY));
 		contentPane.add(desktopPane, BorderLayout.CENTER);
 		
-		JInternalFrame arithmaticLearn = new JInternalFrame("Arithmatic");
-		try {
-			arithmaticLearn.setClosed(true);
-		} catch (PropertyVetoException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		arithmaticLearn.setEnabled(false);
-		arithmaticLearn.setFrameIcon(new ImageIcon(Display.class.getResource("/resources/plus-sign.png")));
-		try {
-			arithmaticLearn.setIcon(true);
-		} catch (PropertyVetoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		arithmaticLearn.setMaximizable(true);
-		arithmaticLearn.setClosable(true);
-		arithmaticLearn.setResizable(true);
-		arithmaticLearn.setBounds(34, 35, 450, 300);
-		desktopPane.add(arithmaticLearn);
+		JToolBar taskbar = new JToolBar();
+		taskbar.setFloatable(false);
+		contentPane.add(taskbar, BorderLayout.SOUTH);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		arithmaticLearn.getContentPane().add(tabbedPane, BorderLayout.CENTER);
+		Component horizontalStrut = Box.createHorizontalStrut(10);
+		taskbar.add(horizontalStrut);
 		
-		JPanel additionPanel = new JPanel();
-		tabbedPane.addTab("Addition", null, additionPanel, "Improve your addition skills.");
+		JToggleButton tglbtnNewToggleButton = new JToggleButton("New toggle button");
+		taskbar.add(tglbtnNewToggleButton);
 		
-		JProgressBar timer = new JProgressBar();
-		timer.setValue(50);
-		timer.setForeground(new Color(255, 0, 0));
-		timer.setBackground(new Color(0, 128, 0));
-		arithmaticLearn.getContentPane().add(timer, BorderLayout.SOUTH);
-		// TODO Set up timer
+		JToggleButton tglbtnNewToggleButton_1 = new JToggleButton("New toggle button");
+		taskbar.add(tglbtnNewToggleButton_1);
 		
 		// TODO Set up open function
+		//Action event
+		mntmArithmatic.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				internalFrames.add(new LearnArithmatic());
+				desktopPane.add(internalFrames.get(internalFrames.size()-1));
+			}
+		});
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
 	}
 }
