@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Window.Type;
+import java.awt.Toolkit;
 
 public class TestWindow extends JFrame {
 
@@ -20,6 +21,7 @@ public class TestWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public TestWindow() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TestWindow.class.getResource("/resources/pen-and-paper.png")));
 		setVisible(true);
 		setResizable(false);
 		setType(Type.POPUP);
