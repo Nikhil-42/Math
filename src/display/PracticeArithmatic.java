@@ -3,19 +3,16 @@ package display;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.beans.PropertyVetoException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 import javax.swing.JSlider;
-import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 
-public class LearnArithmatic extends PracticeWindow {
+public class PracticeArithmatic extends PracticeWindow {
 
 	/**
 	 * 
@@ -25,11 +22,9 @@ public class LearnArithmatic extends PracticeWindow {
 	/**
 	 * Create the frame.
 	 */
-	public LearnArithmatic() {
+	public PracticeArithmatic() {
 		super("Arithmatic");
-		setFrameIcon(new ImageIcon(LearnArithmatic.class.getResource("/resources/Calculator-icon.png")));
-		
-		JTabbedPane tabbedPane = (JTabbedPane) super.getComponentByName("tabs");
+		setFrameIcon(new ImageIcon(PracticeArithmatic.class.getResource("/resources/Calculator-icon.png")));
 				
 		
 		JPanel addition = new JPanel();

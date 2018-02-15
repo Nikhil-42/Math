@@ -179,7 +179,7 @@ public class Display extends JFrame {
 		//Action event
 		mntmArithmatic.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				internalFrames.add(new LearnArithmatic());
+				internalFrames.add(new PracticeArithmatic());
 				desktopPane.add(internalFrames.get(internalFrames.size()-1));
 			}
 		});
