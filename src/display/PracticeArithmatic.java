@@ -1,13 +1,10 @@
 package display;
 
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import javax.swing.JSlider;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
@@ -32,12 +29,6 @@ public class PracticeArithmatic extends PracticeWindow {
 		tabbedPane.addTab("Addition", new ImageIcon(PracticeWindow.class.getResource("/resources/plus-sign.png")), addition, null);
 		addition.setLayout(new CardLayout(0, 0));
 		tabbedPane.setEnabledAt(0, true);
-		
-		JSlider Difficulty = new JSlider();
-		Difficulty.setOrientation(SwingConstants.VERTICAL);
-		getContentPane().add(Difficulty, BorderLayout.EAST);
-		this.setVisible(true);
-
 	}
 
 }

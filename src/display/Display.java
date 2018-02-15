@@ -123,14 +123,38 @@ public class Display extends JFrame {
 		JMenuItem mntmAlgebra = new JMenuItem("Algebra");
 		mnLearn.add(mntmAlgebra);
 		
-		JMenuItem mntmGeometry = new JMenuItem("Geometry");
-		mnLearn.add(mntmGeometry);
+		JMenu mnNewMenu = new JMenu("Geometry");
+		mnLearn.add(mnNewMenu);
+		
+		JMenuItem mntmTrigonometry = new JMenuItem("Trigonometry");
+		mnNewMenu.add(mntmTrigonometry);
 		
 		JMenuItem mntmCalculus = new JMenuItem("Calculus");
 		mnLearn.add(mntmCalculus);
 		
 		JMenuItem mntmLinearAlgebra = new JMenuItem("Linear Algebra");
 		mnLearn.add(mntmLinearAlgebra);
+		
+		JMenu mnPractice = new JMenu("Practice");
+		menuBar.add(mnPractice);
+		
+		JMenuItem menuItem = new JMenuItem("Arithmatic");
+		mnPractice.add(menuItem);
+		
+		JMenuItem menuItem_1 = new JMenuItem("Algebra");
+		mnPractice.add(menuItem_1);
+		
+		JMenu menu = new JMenu("Geometry");
+		mnPractice.add(menu);
+		
+		JMenuItem menuItem_2 = new JMenuItem("Trigonometry");
+		menu.add(menuItem_2);
+		
+		JMenuItem menuItem_3 = new JMenuItem("Calculus");
+		mnPractice.add(menuItem_3);
+		
+		JMenuItem menuItem_4 = new JMenuItem("Linear Algebra");
+		mnPractice.add(menuItem_4);
 		
 		JMenu mnCalculate = new JMenu("Calculate");
 		menuBar.add(mnCalculate);
@@ -175,11 +199,23 @@ public class Display extends JFrame {
 		JToggleButton tglbtnNewToggleButton_1 = new JToggleButton("New toggle button");
 		taskbar.add(tglbtnNewToggleButton_1);
 		
-		// TODO Set up open function
-		//Action event
+		//Action events
 		mntmArithmatic.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//TODO
+			}
+		});
+		
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 				internalFrames.add(new PracticeArithmatic());
+				desktopPane.add(internalFrames.get(internalFrames.size()-1));
+			}
+		});
+
+		menuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				internalFrames.add(new PracticeTrigonometry());
 				desktopPane.add(internalFrames.get(internalFrames.size()-1));
 			}
 		});
