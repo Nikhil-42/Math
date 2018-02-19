@@ -1,6 +1,10 @@
 package computations;
 
-import static computations.General.*;
+import static computations.General.arccos;
+import static computations.General.arcsin;
+import static computations.General.cos;
+import static computations.General.sin;
+import static computations.General.square;
 
 public class Triangle {
 
@@ -34,7 +38,7 @@ public class Triangle {
 	
 	public Triangle(double in1, double in2, double in3, int MODE) {
 		setupMode = MODE;
-		isDefined = true;
+		setDefined(true);
 		switch (MODE) {
 		case SIDE_SIDE_SIDE:
 			a = in1;
@@ -75,7 +79,7 @@ public class Triangle {
 			b = sin(B) * a / sin(A);
 			c = sin(C) * a / sin(A);
 		case ANGLE_ANGLE_ANGLE:
-			isDefined = false;
+			setDefined(false);
 			A = new Angle(in1);
 			B = new Angle(in2);
 			C = new Angle(in3);
@@ -129,5 +133,20 @@ public class Triangle {
 		System.out.println("Measure of side a = " + a);
 		System.out.println("Measure of side b = " + b);
 		System.out.println("Measure of side c = " + c);
+	}
+
+	public boolean isDefined() {
+		return isDefined;
+	}
+
+	public void setDefined(boolean isDefined) {
+		this.isDefined = isDefined;
+	}
+
+	/**
+	 * @return the setupMode
+	 */
+	public int getSetupMode() {
+		return setupMode;
 	}
 }

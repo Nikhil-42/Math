@@ -46,7 +46,6 @@ public class CustomInputStream extends InputStream {
 			}
 		}
 		in.remove(in.size()-1);
-		System.out.println("Read in System.in");
 		String s = "";
 		for(char c: in)
 			s += c;

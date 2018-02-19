@@ -1,6 +1,7 @@
 package display;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -8,10 +9,10 @@ import java.awt.event.FocusEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -19,14 +20,19 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import iomanager.CommandLine;
 import iomanager.CustomInputStream;
 import iomanager.CustomOutputStream;
-import java.awt.Color;
-import javax.swing.JScrollPane;
-import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Insets;
+import javax.swing.ScrollPaneConstants;
 
 public class ControlFrame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField stdIn;
 
@@ -49,9 +55,24 @@ public class ControlFrame extends JFrame {
 		tabbedPane.addTab("Console", null, console, null);
 		console.setLayout(new BorderLayout(0, 0));
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setOpaque(false);
+		scrollPane.setAutoscrolls(true);
+		console.add(scrollPane, BorderLayout.CENTER);
+		
 		JTextArea stdOut = new JTextArea();
+		scrollPane.setViewportView(stdOut);
+		stdOut.setMargin(new Insets(2, 8, 2, 2));
+		stdOut.setSelectionColor(Color.WHITE);
+		stdOut.setSelectedTextColor(Color.MAGENTA);
+		stdOut.setBackground(Color.BLACK);
+		stdOut.setForeground(Color.GREEN);
+		stdOut.setFont(new Font("Impact", Font.PLAIN, 13));
 		stdOut.setEditable(false);
-		console.add(stdOut, BorderLayout.CENTER);
+		
+		//Set the system console
+		PrintStream printstreamOut = new PrintStream(new CustomOutputStream(stdOut));
 
 		JScrollPane errorLog = new JScrollPane();
 		tabbedPane.addTab("Errors", null, errorLog, null);
@@ -69,26 +90,11 @@ public class ControlFrame extends JFrame {
 		errorLog.setViewportView(stdErr);
 		
 		stdIn = new JTextField();
-		stdIn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				ArrayList<Character> in = new ArrayList<Character>();
-				int i = 0;
-				while(i != -1) {
-					try {
-						i = System.in.read();
-						in.add((char) i);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				System.out.println("Read in System.in");
-				String s = "";
-				for(char c: in)
-					s += c;
-				System.out.println(s);
-			}
-		});
+		stdIn.requestFocus();
+		stdIn.setBackground(Color.BLACK);
+		stdIn.setForeground(Color.GREEN);
+		stdIn.setSelectedTextColor(Color.MAGENTA);
+		stdIn.setSelectionColor(Color.WHITE);
 		stdIn.setText("type inputs here");
 		stdIn.setHorizontalAlignment(SwingConstants.TRAILING);
 		stdIn.addFocusListener(new FocusAdapter() {
@@ -103,14 +109,28 @@ public class ControlFrame extends JFrame {
 		});
 		console.add(stdIn, BorderLayout.SOUTH);
 		stdIn.setColumns(10);
-				
-		//Set the system console
-		PrintStream printstreamOut = new PrintStream(new CustomOutputStream(stdOut));
 		System.setOut(printstreamOut);
 		PrintStream printstreamErr = new PrintStream(new CustomOutputStream(stdErr));
 		System.setErr(printstreamErr);
 		InputStream inputstream = new CustomInputStream(stdIn);
 		System.setIn(inputstream);
+		
+		//Action Events
+		
+		//System.in [keyPress (ENTER)]
+		stdIn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					String in = ((CustomInputStream) System.in).readln();
+					System.out.println(in);
+					CommandLine.runCommand(in);
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 }

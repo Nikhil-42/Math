@@ -1,13 +1,11 @@
 package display;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.Window.Type;
-import java.awt.Toolkit;
 
 public class TestWindow extends JFrame {
 

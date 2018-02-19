@@ -8,7 +8,6 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -202,11 +201,6 @@ public class Display extends JFrame {
 		contentPane.add(taskbar, BorderLayout.SOUTH);
 		
 		JButton btnNewButton = new JButton("");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				controlFrame.setVisible(true);
-			}
-		});
 		btnNewButton.setFocusPainted(false);
 		btnNewButton.setRequestFocusEnabled(false);
 		btnNewButton.setMinimumSize(new Dimension(32, 32));
@@ -216,23 +210,31 @@ public class Display extends JFrame {
 		taskbar.add(btnNewButton);
 		
 		//Action events
-		mntmArithmatic.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				//TODO
-			}
-		});
 		
+		//Practice Arithmatic button
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				internalFrames.add(new PracticeArithmatic());
 				desktopPane.add(internalFrames.get(internalFrames.size()-1));
 			}
 		});
-
+		//Practice Trigonometry Button
 		menuItem_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				internalFrames.add(new PracticeTrigonometry());
 				desktopPane.add(internalFrames.get(internalFrames.size()-1));
+			}
+		});
+		//Console button
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				controlFrame.setVisible(true);
+			}
+		});
+		//Exit button
+		mntmExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
 			}
 		});
 	}
