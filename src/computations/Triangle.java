@@ -9,6 +9,7 @@ public class Triangle {
 
 	private double a, b, c;
 	private Angle A, B, C;
+	private boolean isDefined;
 	private int setupMode;
 	
 	public Triangle(double a, double b, double c) {
@@ -24,11 +25,16 @@ public class Triangle {
 	}
 	
 	public Triangle(Angle A, double b, Angle C) {
-		
+		this(A.getMeasure(), b, C.getMeasure(), ANGLE_SIDE_ANGLE);
+	}
+	
+	public Triangle(double a, Angle B, Angle A) {
+		this(a, B.getMeasure(), A.getMeasure(), SIDE_ANGLE_ANGLE);
 	}
 	
 	public Triangle(double in1, double in2, double in3, int MODE) {
 		setupMode = MODE;
+		isDefined = true;
 		switch (MODE) {
 		case SIDE_SIDE_SIDE:
 			a = in1;
@@ -58,10 +64,27 @@ public class Triangle {
 			A = new Angle(in1);
 			B = new Angle(180-in1-in3);
 			C = new Angle(in3);
-			a = sin(A) * in2 / sin(B);
 			b = in2;
+			a = sin(A) * b / sin(B);
 			c = sin(C) * b / sin(B);
+		case SIDE_ANGLE_ANGLE:
+			a = in1;
+			B = new Angle(in2);
+			A = new Angle(in3);
+			C = new Angle(180-in2-in3);
+			b = sin(B) * a / sin(A);
+			c = sin(C) * a / sin(A);
+		case ANGLE_ANGLE_ANGLE:
+			isDefined = false;
+			A = new Angle(in1);
+			B = new Angle(in2);
+			C = new Angle(in3);
+			//Arbitrary selection of '1' for 'a' to prevent null pointers
+			a = 1;
+			b = sin(B) * a / sin(A);
+			c = sin(C) * a / sin(A);
 		}
+		
 	}
 
 	public double getSide(String id) {
@@ -97,5 +120,14 @@ public class Triangle {
 			break;
 		}
 		return out;
+	}
+	
+	public void printTriangle() {
+		System.out.println("Measure of angle A = " + A.getMeasure());
+		System.out.println("Measure of angle B = " + B.getMeasure());
+		System.out.println("Measure of angle C = " + C.getMeasure());
+		System.out.println("Measure of side a = " + a);
+		System.out.println("Measure of side b = " + b);
+		System.out.println("Measure of side c = " + c);
 	}
 }

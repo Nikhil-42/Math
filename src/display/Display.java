@@ -2,14 +2,17 @@ package display;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.swing.Box;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -20,7 +23,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
-import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -34,6 +36,8 @@ public class Display extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField searchBar;
+	
+	public static ControlFrame controlFrame;
 
 	/**
 	 * Launch the application.
@@ -58,6 +62,9 @@ public class Display extends JFrame {
 	private ArrayList<JInternalFrame> internalFrames;
 	
 	public Display() {
+		
+		controlFrame = new ControlFrame();
+		
 		internalFrames = new ArrayList<JInternalFrame>();
 		
 		try {
@@ -187,17 +194,26 @@ public class Display extends JFrame {
 		contentPane.add(desktopPane, BorderLayout.CENTER);
 		
 		JToolBar taskbar = new JToolBar();
+		taskbar.setMaximumSize(new Dimension(13, 32));
+		taskbar.setMinimumSize(new Dimension(13, 32));
+		taskbar.setOpaque(false);
+		taskbar.setBorderPainted(false);
 		taskbar.setFloatable(false);
 		contentPane.add(taskbar, BorderLayout.SOUTH);
 		
-		Component horizontalStrut = Box.createHorizontalStrut(10);
-		taskbar.add(horizontalStrut);
-		
-		JToggleButton tglbtnNewToggleButton = new JToggleButton("New toggle button");
-		taskbar.add(tglbtnNewToggleButton);
-		
-		JToggleButton tglbtnNewToggleButton_1 = new JToggleButton("New toggle button");
-		taskbar.add(tglbtnNewToggleButton_1);
+		JButton btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				controlFrame.setVisible(true);
+			}
+		});
+		btnNewButton.setFocusPainted(false);
+		btnNewButton.setRequestFocusEnabled(false);
+		btnNewButton.setMinimumSize(new Dimension(32, 32));
+		btnNewButton.setMaximumSize(new Dimension(32, 32));
+		btnNewButton.setMargin(new Insets(0, 0, 0, 0));
+		btnNewButton.setIcon(new ImageIcon(Display.class.getResource("/resources/start_button.png")));
+		taskbar.add(btnNewButton);
 		
 		//Action events
 		mntmArithmatic.addActionListener(new ActionListener() {
