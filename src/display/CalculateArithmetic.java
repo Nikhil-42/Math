@@ -9,7 +9,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-public class CalculateArithmatic extends JInternalFrame {
+public class CalculateArithmetic extends JInternalFrame {
 
 	/**
 	 * 
@@ -19,7 +19,7 @@ public class CalculateArithmatic extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CalculateArithmatic() {
+	public CalculateArithmetic() {
 		setIconifiable(true);
 		setMaximizable(true);
 		try {

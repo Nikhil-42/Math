@@ -1,10 +1,10 @@
-package computations;
+package math;
 
-import static computations.General.arccos;
-import static computations.General.arcsin;
-import static computations.General.cos;
-import static computations.General.sin;
-import static computations.General.square;
+import static math.General.arccos;
+import static math.General.arcsin;
+import static math.General.cos;
+import static math.General.sin;
+import static math.General.square;
 
 public class Triangle {
 

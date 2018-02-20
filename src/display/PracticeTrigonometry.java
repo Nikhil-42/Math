@@ -1,5 +1,7 @@
 package display;
 
+import templates.PracticeWindow;
+
 public class PracticeTrigonometry extends PracticeWindow {
 
 	/**

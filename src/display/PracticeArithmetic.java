@@ -9,7 +9,9 @@ import javax.swing.UIManager;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 
-public class PracticeArithmatic extends PracticeWindow {
+import templates.PracticeWindow;
+
+public class PracticeArithmetic extends PracticeWindow {
 
 	/**
 	 * 
@@ -19,9 +21,9 @@ public class PracticeArithmatic extends PracticeWindow {
 	/**
 	 * Create the frame.
 	 */
-	public PracticeArithmatic() {
-		super("Arithmatic");
-		setFrameIcon(new ImageIcon(PracticeArithmatic.class.getResource("/resources/Calculator-icon.png")));
+	public PracticeArithmetic() {
+		super("Arithmetic");
+		setFrameIcon(new ImageIcon(PracticeArithmetic.class.getResource("/resources/Calculator-icon.png")));
 				
 		
 		JPanel addition = new JPanel();

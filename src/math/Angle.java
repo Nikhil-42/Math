@@ -1,4 +1,4 @@
-package computations;
+package math;
 
 public class Angle {
 	

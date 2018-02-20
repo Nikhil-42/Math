@@ -1,4 +1,4 @@
-package display;
+package templates;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;

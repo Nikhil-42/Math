@@ -35,8 +35,11 @@ public class CommandLine {
 			case "clear":
 				((CustomOutputStream) ((CustomPrintStream) System.out).getOut()).clear();
 				break;
+			case "windowlist":
+				
+				break;
 			default:
-				System.out.println("This is not recognized as an internal command.");
+				System.out.println("'" + command + "' is not recognized as an internal command.");
 				break;
 			}
 		} catch (IndexOutOfBoundsException e) {
