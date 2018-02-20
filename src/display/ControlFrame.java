@@ -2,13 +2,13 @@ package display;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,15 +17,14 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import iomanager.CommandLine;
 import iomanager.CustomInputStream;
 import iomanager.CustomOutputStream;
-import java.awt.Font;
-import java.awt.Insets;
-import javax.swing.ScrollPaneConstants;
+import iomanager.CustomPrintStream;
 
 public class ControlFrame extends JFrame {
 
@@ -34,7 +33,6 @@ public class ControlFrame extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField stdIn;
 
 	/**
 	 * Create the frame.
@@ -71,9 +69,6 @@ public class ControlFrame extends JFrame {
 		stdOut.setFont(new Font("Impact", Font.PLAIN, 13));
 		stdOut.setEditable(false);
 		
-		//Set the system console
-		PrintStream printstreamOut = new PrintStream(new CustomOutputStream(stdOut));
-
 		JScrollPane errorLog = new JScrollPane();
 		tabbedPane.addTab("Errors", null, errorLog, null);
 		tabbedPane.setEnabledAt(1, true);
@@ -89,7 +84,7 @@ public class ControlFrame extends JFrame {
 		stdErr.setEditable(false);
 		errorLog.setViewportView(stdErr);
 		
-		stdIn = new JTextField();
+		JTextField stdIn = new JTextField();
 		stdIn.requestFocus();
 		stdIn.setBackground(Color.BLACK);
 		stdIn.setForeground(Color.GREEN);
@@ -109,10 +104,13 @@ public class ControlFrame extends JFrame {
 		});
 		console.add(stdIn, BorderLayout.SOUTH);
 		stdIn.setColumns(10);
+
+		//Set the system console
+		CustomPrintStream printstreamOut = new CustomPrintStream(new CustomOutputStream(stdOut));
 		System.setOut(printstreamOut);
-		PrintStream printstreamErr = new PrintStream(new CustomOutputStream(stdErr));
+		CustomPrintStream printstreamErr = new CustomPrintStream(new CustomOutputStream(stdErr));
 		System.setErr(printstreamErr);
-		InputStream inputstream = new CustomInputStream(stdIn);
+		CustomInputStream inputstream = new CustomInputStream(stdIn);
 		System.setIn(inputstream);
 		
 		//Action Events
