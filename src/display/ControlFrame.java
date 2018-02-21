@@ -66,7 +66,7 @@ public class ControlFrame extends JFrame {
 		stdOut.setSelectedTextColor(Color.MAGENTA);
 		stdOut.setBackground(Color.BLACK);
 		stdOut.setForeground(Color.GREEN);
-		stdOut.setFont(new Font("Impact", Font.PLAIN, 13));
+		stdOut.setFont(new Font("Lucida Console", Font.PLAIN, 13));
 		stdOut.setEditable(false);
 		
 		JScrollPane errorLog = new JScrollPane();

@@ -9,7 +9,9 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-public class CalculateArithmetic extends JInternalFrame {
+import templates.CalculateWindow;
+
+public class CalculateArithmetic extends CalculateWindow {
 
 	/**
 	 * 
@@ -20,15 +22,6 @@ public class CalculateArithmetic extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public CalculateArithmetic() {
-		setIconifiable(true);
-		setMaximizable(true);
-		try {
-			setIcon(true);
-		} catch (PropertyVetoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		setBounds(100, 100, 450, 300);
 		
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);

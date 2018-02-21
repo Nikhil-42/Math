@@ -1,49 +1,36 @@
 package display;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-
-import javax.swing.Box;
-import javax.swing.JInternalFrame;
-import javax.swing.JSplitPane;
-import javax.swing.JPanel;
-import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 
+import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JLayeredPane;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.TitledBorder;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.swing.border.BevelBorder;
-import java.awt.Color;
+import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
-public class CalculateTrigonometry extends JInternalFrame {
+import templates.CalculateWindow;
+
+public class CalculateTrigonometry extends CalculateWindow {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	public CalculateTrigonometry() {
-		setSize(new Dimension(500, 300));
-		try {
-			setSelected(true);
-		} catch (PropertyVetoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		setName("Trig Window");
-		setVisible(true);
-		setTitle("Calculate Trigonometry");
-		setResizable(true);
-		setOpaque(true);
+		super();
+		
+		
 		
 		JSplitPane controlsDisplay = new JSplitPane();
 		getContentPane().add(controlsDisplay, BorderLayout.CENTER);
