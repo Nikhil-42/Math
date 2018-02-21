@@ -3,11 +3,15 @@
  */
 package iomanager;
 
+import java.util.ArrayList;
+
 /**
  * @author kapow
  *
  */
 public class CommandLine {
+	
+	public static ArrayList<Command> availableCommands;
 	
 	public static void runCommand(String command) {
 		String[] arguments = null;
