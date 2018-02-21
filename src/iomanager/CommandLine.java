@@ -14,6 +14,17 @@ public class CommandLine {
 	public static ArrayList<Command> availableCommands;
 	
 	public static void runCommand(String command) {
+		
+		availableCommands.add(new Command("exit", new Runnable() {
+			public void run() {
+				latestArg = 0;
+				if (hasArgs)
+					System.exit(Integer.parseInt(arguments[latestArg]));
+				else
+					System.exit(0);
+			}
+		}));
+		
 		String[] arguments = null;
 		int latestArg = 0;
 		boolean hasArgs;
@@ -30,19 +41,16 @@ public class CommandLine {
 			switch (command) {
 			case "exit":
 			case "close":
-				latestArg = 0;
-				if (hasArgs)
-					System.exit(Integer.parseInt(arguments[latestArg]));
-				else
-					System.exit(0);
+				
 				break;
 			case "clear":
 				((CustomOutputStream) ((CustomPrintStream) System.out).getOut()).clear();
 				break;
-			case "windowlist":
-				
-				break;
 			default:
+				boolean activated = false;
+				for (Command c: availableCommands) {
+					c.tryCommand(command, arguments);
+				}
 				System.out.println("'" + command + "' is not recognized as an internal command.");
 				break;
 			}
@@ -53,5 +61,9 @@ public class CommandLine {
 			System.out.println("Invalid argument : '" + arguments[latestArg] + "'");
 			e.printStackTrace();
 		}
+	}
+	
+	public static void addCommand(Command c) {
+		availableCommands.add(c);
 	}
 }
