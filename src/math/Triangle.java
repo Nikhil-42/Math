@@ -6,6 +6,10 @@ import static math.General.cos;
 import static math.General.sin;
 import static math.General.square;
 
+import java.awt.Graphics;
+
+import templates.PaintableObject;
+
 public class Triangle {
 
 	public static final int SIDE_SIDE_SIDE = 0, SIDE_ANGLE_SIDE = 1, ANGLE_SIDE_SIDE = 2, ANGLE_SIDE_ANGLE = 3,
@@ -13,6 +17,7 @@ public class Triangle {
 
 	private double a, b, c;
 	private Angle A, B, C;
+	private int[] xPoints, yPoints;
 	private boolean isDefined;
 	private int setupMode;
 	
@@ -148,5 +153,6 @@ public class Triangle {
 	 */
 	public int getSetupMode() {
 		return setupMode;
-	}
+	}	
+	
 }

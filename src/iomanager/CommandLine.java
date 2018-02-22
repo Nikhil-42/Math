@@ -12,22 +12,11 @@ import java.util.ArrayList;
 public class CommandLine {
 	
 	public static ArrayList<Command> availableCommands;
+	public static int latestArg;
+	public static String[] arguments;
+	public static boolean hasArgs;
 	
-	public static void runCommand(String command) {
-		
-		availableCommands.add(new Command("exit", new Runnable() {
-			public void run() {
-				latestArg = 0;
-				if (hasArgs)
-					System.exit(Integer.parseInt(arguments[latestArg]));
-				else
-					System.exit(0);
-			}
-		}));
-		
-		String[] arguments = null;
-		int latestArg = 0;
-		boolean hasArgs;
+	public static void runCommand(String command) {	
 		
 		try {
 			if (command.indexOf(" ") != -1) {
@@ -38,6 +27,15 @@ public class CommandLine {
 				arguments = new String[0];
 				hasArgs = false;
 			}
+			availableCommands.add(new Command("exit", new Runnable() {
+				public void run() {
+					latestArg = 0;
+					if (hasArgs)
+						System.exit(Integer.parseInt(arguments[latestArg]));
+					else
+						System.exit(0);
+				}
+			}));
 			switch (command) {
 			case "exit":
 			case "close":
