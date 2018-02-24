@@ -6,7 +6,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyVetoException;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -80,6 +79,9 @@ public class CalculateTrigonometry extends CalculateWindow {
 		
 		Component horizontalStrut = Box.createHorizontalStrut(128);
 		stackParameters.add(horizontalStrut);
+		
+		JPanel panel = new JPanel();
+		stackParameters.add(panel);
 		
 		JLayeredPane layeredPane = new JLayeredPane();
 		layeredPane.setBorder(new CompoundBorder(new TitledBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null), "Content Pane", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));

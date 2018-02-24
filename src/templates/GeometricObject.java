@@ -11,6 +11,10 @@ public abstract class GeometricObject {
 		globalX = x;
 		globalY = y;
 	}
+	
+	public void draw() {
+		
+	}
 
 	public int getX() {
 		return x;
