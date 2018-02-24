@@ -113,6 +113,9 @@ public class ControlFrame extends JFrame {
 		CustomInputStream inputstream = new CustomInputStream(stdIn);
 		System.setIn(inputstream);
 		
+		//Set up CommandLine
+		CommandLine.setupCommandLine();
+		
 		//Action Events
 		
 		//System.in [keyPress (ENTER)]

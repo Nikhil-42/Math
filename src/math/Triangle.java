@@ -8,39 +8,38 @@ import static math.General.square;
 
 import java.awt.Graphics;
 
-import templates.PaintableObject;
+import templates.GeometricObject;
 
-public class Triangle {
+public class Triangle extends GeometricObject {
 
 	public static final int SIDE_SIDE_SIDE = 0, SIDE_ANGLE_SIDE = 1, ANGLE_SIDE_SIDE = 2, ANGLE_SIDE_ANGLE = 3,
 			SIDE_ANGLE_ANGLE = 4, ANGLE_ANGLE_ANGLE = 5;
 
 	private double a, b, c;
 	private Angle A, B, C;
-	private int[] xPoints, yPoints;
 	private boolean isDefined;
 	private int setupMode;
-	
+
 	public Triangle(double a, double b, double c) {
 		this(a, b, c, SIDE_SIDE_SIDE);
 	}
-	
+
 	public Triangle(double a, Angle C, double b) {
 		this(a, C.getMeasure(), b, SIDE_ANGLE_SIDE);
 	}
-	
+
 	public Triangle(Angle A, double b, double a) {
 		this(A.getMeasure(), b, a, ANGLE_SIDE_SIDE);
 	}
-	
+
 	public Triangle(Angle A, double b, Angle C) {
 		this(A.getMeasure(), b, C.getMeasure(), ANGLE_SIDE_ANGLE);
 	}
-	
+
 	public Triangle(double a, Angle B, Angle A) {
 		this(a, B.getMeasure(), A.getMeasure(), SIDE_ANGLE_ANGLE);
 	}
-	
+
 	public Triangle(double in1, double in2, double in3, int MODE) {
 		setupMode = MODE;
 		setDefined(true);
@@ -71,7 +70,7 @@ public class Triangle {
 			break;
 		case ANGLE_SIDE_ANGLE:
 			A = new Angle(in1);
-			B = new Angle(180-in1-in3);
+			B = new Angle(180 - in1 - in3);
 			C = new Angle(in3);
 			b = in2;
 			a = sin(A) * b / sin(B);
@@ -80,7 +79,7 @@ public class Triangle {
 			a = in1;
 			B = new Angle(in2);
 			A = new Angle(in3);
-			C = new Angle(180-in2-in3);
+			C = new Angle(180 - in2 - in3);
 			b = sin(B) * a / sin(A);
 			c = sin(C) * a / sin(A);
 		case ANGLE_ANGLE_ANGLE:
@@ -88,12 +87,12 @@ public class Triangle {
 			A = new Angle(in1);
 			B = new Angle(in2);
 			C = new Angle(in3);
-			//Arbitrary selection of '1' for 'a' to prevent null pointers
+			// Arbitrary selection of '1' for 'a' to prevent null pointers
 			a = 1;
 			b = sin(B) * a / sin(A);
 			c = sin(C) * a / sin(A);
 		}
-		
+
 	}
 
 	public double getSide(String id) {
@@ -130,7 +129,7 @@ public class Triangle {
 		}
 		return out;
 	}
-	
+
 	public void printTriangle() {
 		System.out.println("Measure of angle A = " + A.getMeasure());
 		System.out.println("Measure of angle B = " + B.getMeasure());
@@ -140,10 +139,19 @@ public class Triangle {
 		System.out.println("Measure of side c = " + c);
 	}
 
+	public void draw(Graphics g, int scale) {
+	}
+
+	/**
+	 * @return isDefined
+	 */
 	public boolean isDefined() {
 		return isDefined;
 	}
 
+	/**
+	 * @param isDefined
+	 */
 	public void setDefined(boolean isDefined) {
 		this.isDefined = isDefined;
 	}
@@ -153,6 +161,6 @@ public class Triangle {
 	 */
 	public int getSetupMode() {
 		return setupMode;
-	}	
-	
+	}
+
 }
