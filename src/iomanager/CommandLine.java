@@ -46,11 +46,10 @@ public class CommandLine {
 				hasArgs = false;
 			}
 			boolean commandRun = false;
-			for(Command c: availableCommands) {
-				if(c.tryCommand(command, arguments)) {
+			for(Command c: availableCommands)
+				if(c.tryCommand(command, arguments))
 					commandRun = true;
-				}
-			}
+
 			if (!commandRun) {
 				System.out.println("'" + command + "' is not recognized as an internal command.");
 			}
