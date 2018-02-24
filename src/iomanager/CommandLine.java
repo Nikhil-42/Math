@@ -45,7 +45,6 @@ public class CommandLine {
 				((CustomOutputStream) ((CustomPrintStream) System.out).getOut()).clear();
 				break;
 			default:
-				boolean activated = false;
 				for (Command c: availableCommands) {
 					c.tryCommand(command, arguments);
 				}

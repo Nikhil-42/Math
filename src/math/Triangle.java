@@ -6,18 +6,15 @@ import static math.General.cos;
 import static math.General.sin;
 import static math.General.square;
 
-import java.awt.Graphics;
+import templates.GeometricObject;
 
-import templates.PaintableObject;
-
-public class Triangle {
+public class Triangle extends GeometricObject {
 
 	public static final int SIDE_SIDE_SIDE = 0, SIDE_ANGLE_SIDE = 1, ANGLE_SIDE_SIDE = 2, ANGLE_SIDE_ANGLE = 3,
 			SIDE_ANGLE_ANGLE = 4, ANGLE_ANGLE_ANGLE = 5;
 
 	private double a, b, c;
 	private Angle A, B, C;
-	private int[] xPoints, yPoints;
 	private boolean isDefined;
 	private int setupMode;
 	
@@ -147,12 +144,16 @@ public class Triangle {
 	public void setDefined(boolean isDefined) {
 		this.isDefined = isDefined;
 	}
-
+	
 	/**
 	 * @return the setupMode
 	 */
 	public int getSetupMode() {
 		return setupMode;
-	}	
+	}
 	
+	@Override
+	public void draw() {
+		
+	}	
 }
