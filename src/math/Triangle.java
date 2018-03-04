@@ -6,6 +6,7 @@ import static math.General.cos;
 import static math.General.sin;
 import static math.General.square;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import templates.GeometricObject;
@@ -43,6 +44,8 @@ public class Triangle extends GeometricObject {
 	public Triangle(double in1, double in2, double in3, int MODE) {
 		setupMode = MODE;
 		setDefined(true);
+		x = 0;
+		y = 0;
 		switch (MODE) {
 		case SIDE_SIDE_SIDE:
 			a = in1;
@@ -92,7 +95,7 @@ public class Triangle extends GeometricObject {
 			b = sin(B) * a / sin(A);
 			c = sin(C) * a / sin(A);
 		}
-
+		
 	}
 
 	public double getSide(String id) {
@@ -152,18 +155,52 @@ public class Triangle extends GeometricObject {
 	public void setDefined(boolean isDefined) {
 		this.isDefined = isDefined;
 	}
-	
+
 	/**
 	 * @return the setupMode
 	 */
 	public int getSetupMode() {
 		return setupMode;
 	}
+	
+	private int[][] getPoints(int scale) {
+		int[][] points = new int[2][3];
+		
+		int[] xPoints, yPoints;
+		xPoints = new int[3];
+		yPoints = new int[3];
+		xPoints[0] = globalX;
+		yPoints[0] = globalY;
+		xPoints[1] = (int) (xPoints[0] + c * scale);
+		yPoints[1] = globalY;
+		if (B.getMeasure() > 90) {
+			xPoints[2] = xPoints[1] + (int) (cos(B) * a*scale);
+			System.out.println(xPoints[1]);
+			System.out.println(cos(B) *a*scale);
+		} else {
+			xPoints[2] = xPoints[1] - (int) (cos(B) * a*scale);
+			System.out.println(xPoints[1]);
+			System.out.println(cos(B) *a);
+		}
+		yPoints[2] = globalY + (int) (sin(B) * a*scale);
+		
+		points[0] = xPoints;
+		points[1] = yPoints;
+		printTriangle();
+		return points;
+		
+	}
 
 	@Override
 	public void draw(Graphics g, int scale) {
-		// TODO Auto-generated method stub
-		
+		updateGlobalPos(scale);
+		int[][] points = getPoints(scale);
+		int[] xPoints = points[0];
+		int[] yPoints = points[1];
+
+		g.setColor(Color.BLACK);
+		g.drawPolygon(xPoints, yPoints, 3);
+		System.out.println("It worked" + "\nSort of");
 	}
 
 }

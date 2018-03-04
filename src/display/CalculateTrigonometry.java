@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.border.BevelBorder;
@@ -18,6 +17,8 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import math.CoordinatePlane;
+import math.Triangle;
 import templates.CalculateWindow;
 
 public class CalculateTrigonometry extends CalculateWindow {
@@ -52,10 +53,6 @@ public class CalculateTrigonometry extends CalculateWindow {
 		stackObjectButtons.add(lblNewLabel);
 		
 		JButton createTriangle = new JButton("Triangle");
-		createTriangle.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		
 		JButton createVariable = new JButton("Variable");
 		createVariable.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -83,9 +80,16 @@ public class CalculateTrigonometry extends CalculateWindow {
 		JPanel panel = new JPanel();
 		stackParameters.add(panel);
 		
-		JLayeredPane layeredPane = new JLayeredPane();
-		layeredPane.setBorder(new CompoundBorder(new TitledBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null), "Content Pane", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
-		controlsDisplay.setRightComponent(layeredPane);
+		CoordinatePlane output = new CoordinatePlane(50);
+		output.setBorder(new CompoundBorder(new TitledBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null), "Content Pane", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), new EtchedBorder(EtchedBorder.LOWERED, null, null)));
+		controlsDisplay.setRightComponent(output);
+		
+		//Action Events
+		createTriangle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				output.addObject(new Triangle(2,2,1));
+			}
+		});		
 	}
 
 }

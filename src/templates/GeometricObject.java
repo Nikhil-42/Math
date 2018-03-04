@@ -2,34 +2,42 @@ package templates;
 
 import java.awt.Graphics;
 
+import math.CoordinatePlane;
+
 public abstract class GeometricObject {
 	
-	private int x, y;
-	private int globalX, globalY;
+	protected double x, y;
+	protected int globalX, globalY;
+	protected Parameter[] params;
+	protected CoordinatePlane master;
 	
-	public void setGlobalPos(int x, int y) {
-		globalX = x;
-		globalY = y;
-	}
-	
-	public void draw() {
-		
+	public void updateGlobalPos(int scale) {
+		globalX = (int) (x*scale);
+		globalY = (int) (y*scale);
 	}
 
-	public int getX() {
+	public double getX() {
 		return x;
 	}
 
-	public void setX(int x) {
+	public void setX(double x) {
 		this.x = x;
 	}
 
-	public int getY() {
+	public double getY() {
 		return y;
 	}
 
-	public void setY(int y) {
+	public void setY(double y) {
 		this.y = y;
+	}
+	
+	public void setCoordinatePlane(CoordinatePlane p) {
+		master = p;
+	}
+	
+	public CoordinatePlane getCoordinatePlane() {
+		return master;
 	}
 	
 	public abstract void draw(Graphics g, int scale);
